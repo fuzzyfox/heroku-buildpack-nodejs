@@ -1,7 +1,7 @@
 Heroku Buildpack for Node.js
 ============================
 
-This is the official [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Node.js apps. If you fork this repository, please **update this README** to explain what your fork does and why it's special.
+This unofficial [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Node.js apps adds bower and grunt support to the build process of Node.js applications.
 
 
 How it Works
