@@ -84,15 +84,15 @@ fi
 
   status "Installing bower"
   # Add bower support to node apps
-  npm install -g bower
+  npm install -g bower 2>&1 | indent
 
   status "Installing grunt-cli"
   # Add grunt support to node apps
-  npm install -g grunt-cli
+  npm install -g grunt-cli 2>&1 | indent
 
   status "Installing dependencies"
   # Make npm output to STDOUT instead of its default STDERR
-  npm install --userconfig $build_dir/.npmrc --production 2>&1 | indent
+  npm install --userconfig $build_dir/.npmrc 2>&1 | indent
 )
 
 # Persist goodies like node-version in the slug
@@ -139,6 +139,11 @@ fi
 status "Building runtime environment"
 mkdir -p $build_dir/.profile.d
 echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
+
+(
+  status "Pruning devDependencies"
+  npm prune --production 2>&1 | indent
+)
 
 # Post package.json to nomnom service
 # Use a subshell so failures won't break the build.
